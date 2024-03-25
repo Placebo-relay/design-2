@@ -8,23 +8,30 @@ def main():
     # Sidebar for user input
     st.sidebar.header('Enter Custom Function')
     custom_function = st.sidebar.text_input('f(x) = ', 'x**2 - 4')
+    initial_guess = st.sidebar.text_input('Initial Guess', value='pi')
 
-    # Parse the custom function using SymPy
-    custom_function_expr = sympify(custom_function)
+    # Parse the custom function and initial guess using SymPy
+    try:
+        custom_function_expr = sympify(custom_function)
+        user_input = sympify(initial_guess)
+    except SympifyError:
+        st.sidebar.error('Invalid input. Please enter a valid mathematical expression.')
+        return
 
-    # Main body
-    st.header('Root Finding Methods')
+    # Display the input and output side by side
+    col1, col2 = st.beta_columns(2)
+    with col1:
+        st.write('Input:', custom_function)
+        st.write('Initial Guess:', initial_guess)
 
-    # Method 1: Newton's method with initial guess
-    st.subheader('Newton\'s Method')
-    initial_guess = st.number_input('Initial Guess', value=1.0)
-    if st.button('Find Root with Newton\'s Method'):
-        root_newton = newtons_method(custom_function_expr, initial_guess)
+    with col2:
+        # Method 1: Newton's method
+        st.subheader('Newton\'s Method')
+        root_newton = newtons_method(custom_function_expr, user_input)
         st.write(f'Root found with Newton\'s Method: {root_newton:.6f}')
 
-    # Method 2: Super accurate method for finding all roots
-    st.subheader('Super Accurate Method')
-    if st.button('Find All Roots'):
+        # Method 2: Super accurate method
+        st.subheader('Super Accurate Method')
         all_roots = find_all_roots(custom_function_expr)
         st.write(f'All roots found: {all_roots}')
 
