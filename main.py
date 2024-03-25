@@ -75,13 +75,10 @@ def newtons_method(expr, initial_guess, tol=1e-6, max_iter=100):
 def find_all_roots(expr, tol=1e-6):
     x = symbols('x')
     roots = []
-    for guess in np.linspace(-10, 10, 100):  # Try different initial guesses
+    for guess in np.linspace(-10, 10, 1000):  # Try different initial guesses
         try:
             root = nsolve(expr, x, guess)
-            root_eval = root.evalf()
-            # Check if the root is distinct from existing roots
-            if all(abs(root_eval - r) > tol for r in roots):
-                roots.append(root_eval)
+            roots.append(root.evalf())
         except:
             pass  # Ignore any exceptions
     return roots
