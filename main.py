@@ -19,7 +19,7 @@ def main():
         return
 
     # Display the input and output side by side
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     with col1:
         st.write('Input:', custom_function)
         st.write('Initial Guess:', initial_guess)
