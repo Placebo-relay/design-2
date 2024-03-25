@@ -42,7 +42,7 @@ def newtons_method(expr, initial_guess, tol=1e-6, max_iter=100):
     return x_n
 
 def find_all_roots(expr):
-    x = sp.symbols('x')
+    x = symbols('x')
     roots = []
     for guess in np.linspace(-10, 10, 100):  # Try different initial guesses
         try:
