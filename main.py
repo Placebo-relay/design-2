@@ -17,7 +17,8 @@ def main():
 
     # Method 1: Newton's method with initial guess
     st.subheader('Newton\'s Method')
-    initial_guess = st.number_input('Initial Guess', value=1.0)
+    initial_guess = st.sidebar.text_input('Initial Guess', value='pi')
+    #initial_guess = st.number_input('Initial Guess', value=1.0)
     if st.button('Find Root with Newton\'s Method'):
         root_newton = newtons_method(custom_function_expr, initial_guess)
         st.write(f'Root found with Newton\'s Method: {root_newton:.6f}')
