@@ -16,10 +16,9 @@ def main():
     st.header('Root Finding Methods')
 
     # Method 1: Newton's method with initial guess
-    st.subheader('Newton\'s Method')
-    initial_guess = st.sidebar.text_input('Initial Guess', value='pi')
-    #initial_guess = st.number_input('Initial Guess', value=1.0)
-    if st.button('Find Root with Newton\'s Method'):
+    st.subheader("Newton's Method")
+    initial_guess = st.sidebar.text_input('Initial Guess', value='3.0')
+    if st.button("Find Root with Newton's Method"):
         root_newton = newtons_method(custom_function_expr, initial_guess)
         st.write(f'Root found with Newton\'s Method: {root_newton:.6f}')
 
@@ -34,7 +33,7 @@ def newtons_method(expr, initial_guess, tol=1e-6, max_iter=100):
     f = lambdify(x, expr, 'numpy')
     f_prime = lambdify(x, diff(expr, x), 'numpy')
 
-    x_n = initial_guess
+    x_n = float(initial_guess)  # Convert initial_guess to float
     for _ in range(max_iter):
         x_n1 = x_n - f(x_n) / f_prime(x_n)
         if abs(x_n1 - x_n) < tol:
