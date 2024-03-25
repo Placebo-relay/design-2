@@ -37,7 +37,7 @@ def main():
     st.title('🧮Root Finder')
 
     # Sidebar for user input
-    st.sidebar.header('Custom Function', divider=1)
+    st.sidebar.header('Custom Function')
     custom_function = st.sidebar.text_input('f(x) = ', 'x**2 - 4')
 
     # Parse the custom function using SymPy
