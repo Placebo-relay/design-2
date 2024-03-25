@@ -10,7 +10,7 @@ def main():
     custom_function = st.sidebar.text_input('f(x) = ', 'x**2 - 4')
 
     # Parse the custom function using SymPy
-    custom_function_expr = sp.sympify(custom_function)
+    custom_function_expr = sympify(custom_function)
 
     # Main body
     st.header('Root Finding Methods')
@@ -29,9 +29,9 @@ def main():
         st.write(f'All roots found: {all_roots}')
 
 def newtons_method(expr, initial_guess, tol=1e-6, max_iter=100):
-    x = sp.symbols('x')
-    f = sp.lambdify(x, expr, 'numpy')
-    f_prime = sp.lambdify(x, sp.diff(expr, x), 'numpy')
+    x = symbols('x')
+    f = lambdify(x, expr, 'numpy')
+    f_prime = lambdify(x, diff(expr, x), 'numpy')
 
     x_n = initial_guess
     for _ in range(max_iter):
@@ -42,8 +42,8 @@ def newtons_method(expr, initial_guess, tol=1e-6, max_iter=100):
     return x_n
 
 def find_all_roots(expr):
-    x = sp.symbols('x')
-    roots = sp.solveset(expr, x)
+    x = symbols('x')
+    roots = solveset(expr, x)
     return [root.evalf() for root in roots]
 
 if __name__ == '__main__':
