@@ -1,12 +1,28 @@
-import streamlit as st
-import sympy as sp
-import numpy as np
+def main():
+    st.title('Custom Function Root Finder')
 
-# Inside the main() function
-def find_all_roots(expr):
-    x = sp.symbols('x')
-    roots = sp.solveset(expr, x)
-    return [root.evalf() for root in roots]
+    # Sidebar for user input
+    st.sidebar.header('Enter Custom Function')
+    custom_function = st.sidebar.text_input('f(x) = ', 'x**2 - 4')
+
+    # Parse the custom function using SymPy
+    custom_function_expr = sp.sympify(custom_function)
+
+    # Main body
+    st.header('Root Finding Methods')
+
+    # Method 1: Newton's method with initial guess
+    st.subheader('Newton\'s Method')
+    initial_guess = st.number_input('Initial Guess', value=1.0)
+    if st.button('Find Root with Newton\'s Method'):
+        root_newton = newtons_method(custom_function_expr, initial_guess)
+        st.write(f'Root found with Newton\'s Method: {root_newton:.6f}')
+
+    # Method 2: Super accurate method for finding all roots
+    st.subheader('Super Accurate Method')
+    if st.button('Find All Roots'):
+        all_roots = find_all_roots(custom_function_expr)
+        st.write(f'All roots found: {all_roots}')
 
 def newtons_method(expr, initial_guess, tol=1e-6, max_iter=100):
     x = sp.symbols('x')
@@ -21,26 +37,10 @@ def newtons_method(expr, initial_guess, tol=1e-6, max_iter=100):
         x_n = x_n1
     return x_n
 
-
-def main():
-    st.title('Custom Function Root Finder')
-
-    # Sidebar for user input
-    st.sidebar.header('Enter Custom Function')
-    custom_function = st.sidebar.text_input('f(x) = ', 'x**2 - 4')
-    custom_function_expr = sp.sympify(custom_function)
-
-    # Main body
-    st.header('Root Finding Methods')
-
-    # Method 1: Newton's method with initial guess
-    st.subheader('Newton\'s Method')
-    initial_guess = st.number_input('Initial Guess', value=1.0)
-    # Implement Newton's method here
-
-    # Method 2: Super accurate method for finding all roots
-    st.subheader('Super Accurate Method')
-    # Implement super accurate method here
+def find_all_roots(expr):
+    x = sp.symbols('x')
+    roots = sp.solveset(expr, x)
+    return [root.evalf() for root in roots]
 
 if __name__ == '__main__':
     main()
