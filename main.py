@@ -3,10 +3,41 @@ from sympy import *
 import numpy as np
 
 def main():
-    st.title('Custom Function Root Finder')
+
+    hide_menu = """
+    <style>
+    header {
+        visibility: hidden;
+    }
+    #MainMenu {
+        visibility: hidden;
+    }
+    
+    footer {
+        visibility: visible;
+    }
+    footer:after{
+        visibility: visible;
+        Content:"Demo for design_practice. Copyright @ 2024";
+        display: block;
+        position: relative;
+        padding: 5px;
+        top:3px;
+        color: tomato;
+        text-align: left;
+    </style>
+    """
+    st.set_page_config(
+    page_title="Root-finder",
+    page_icon="🧮",
+    layout="wide",
+    initial_sidebar_state="expanded"
+    )
+    
+    st.title('🧮Root Finder')
 
     # Sidebar for user input
-    st.sidebar.header('Enter Custom Function')
+    st.sidebar.header('Custom Function', divider=1)
     custom_function = st.sidebar.text_input('f(x) = ', 'x**2 - 4')
 
     # Parse the custom function using SymPy
