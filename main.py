@@ -42,9 +42,15 @@ def newtons_method(expr, initial_guess, tol=1e-6, max_iter=100):
     return x_n
 
 def find_all_roots(expr):
-    x = symbols('x')
-    roots = solveset(expr, x)
-    return [root.evalf() for root in roots]
+    x = sp.symbols('x')
+    roots = []
+    for guess in np.linspace(-10, 10, 100):  # Try different initial guesses
+        try:
+            root = nsolve(expr, x, guess)
+            roots.append(root.evalf())
+        except:
+            pass  # Ignore any exceptions
+    return roots
 
 if __name__ == '__main__':
     main()
