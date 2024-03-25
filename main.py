@@ -1,3 +1,7 @@
+import streamlit as st
+import sympy as sp
+import numpy as np
+
 def main():
     st.title('Custom Function Root Finder')
 
