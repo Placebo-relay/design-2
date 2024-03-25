@@ -1,5 +1,5 @@
 import streamlit as st
-import sympy as sp
+from sympy import *
 import numpy as np
 
 def main():
